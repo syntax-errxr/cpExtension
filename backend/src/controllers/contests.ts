@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import axios from 'axios';
+import { httpGet } from '../utils/http';
 import { redis } from '../utils/redis';
 import { AtCoderService } from '../services/atcoder';
 import { CodeChefService } from '../services/codechef';
@@ -72,7 +73,7 @@ function getLeetCodeUpcomingContests(): any[] {
 
 async function fetchCodeforcesUpcoming(): Promise<any[]> {
   try {
-    const response = await axios.get('https://codeforces.com/api/contest.list', { timeout: 8000 });
+    const response = await httpGet('https://codeforces.com/api/contest.list', { timeout: 8000 });
     if (response.data.status === 'OK') {
       const list: any[] = response.data.result;
       return list

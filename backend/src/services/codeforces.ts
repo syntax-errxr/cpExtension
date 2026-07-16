@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { httpGet } from '../utils/http';
 
 export interface CodeforcesSubmission {
   problem_id: string;
@@ -22,7 +23,7 @@ export class CodeforcesService {
 
   public static async fetchUserInfo(username: string): Promise<{ rating?: number } | null> {
     try {
-      const response = await axios.get(`${this.BASE_URL}/user.info`, {
+      const response = await httpGet(`${this.BASE_URL}/user.info`, {
         params: { handles: username },
         timeout: 10000,
       });
@@ -40,7 +41,7 @@ export class CodeforcesService {
 
   public static async fetchUserSubmissions(username: string): Promise<CodeforcesSubmission[]> {
     try {
-      const response = await axios.get(`${this.BASE_URL}/user.status`, {
+      const response = await httpGet(`${this.BASE_URL}/user.status`, {
         params: { handle: username, from: 1, count: 200 },
         timeout: 12000,
       });
@@ -80,7 +81,7 @@ export class CodeforcesService {
 
   public static async fetchUserRatingHistory(username: string): Promise<CodeforcesHistoryItem[]> {
     try {
-      const response = await axios.get(`${this.BASE_URL}/user.rating`, {
+      const response = await httpGet(`${this.BASE_URL}/user.rating`, {
         params: { handle: username },
         timeout: 10000,
       });

@@ -55,7 +55,7 @@ chrome.notifications.onClicked.addListener((notificationId) => {
 // Fetch contests from backend and trigger notifications if starting soon
 async function checkUpcomingContests() {
   try {
-    const response = await fetch("https://cp-contest-extension.onrender.com/api/contests");
+    const response = await fetch("http://localhost:8000/api/contests");
     if (!response.ok) return;
     
     const contests = await response.json();

@@ -6,8 +6,7 @@
   "permissions": [
     "storage",
     "alarms",
-    "notifications",
-    "identity"
+    "notifications"
   ],
   "action": {
     "default_popup": "index.html",

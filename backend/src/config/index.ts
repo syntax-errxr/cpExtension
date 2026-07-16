@@ -8,4 +8,5 @@ export const config = {
   env: process.env.ENV || 'development',
   databaseUrl: process.env.DATABASE_URL || 'file:./test.db',
   redisUrl: process.env.REDIS_URL || '',
+  scraperApiKey: process.env.SCRAPER_API_KEY || '',
 };

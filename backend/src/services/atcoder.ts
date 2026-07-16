@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { httpGet } from '../utils/http';
 import * as cheerio from 'cheerio';
 
 export interface AtCoderProfile {
@@ -27,7 +28,7 @@ export class AtCoderService {
   public static async fetchUserRating(username: string): Promise<AtCoderProfile | null> {
     try {
       const profileUrl = `${this.BASE_URL}/users/${username}`;
-      const response = await axios.get(profileUrl, { headers: this.HEADERS, timeout: 10000 });
+      const response = await httpGet(profileUrl, { headers: this.HEADERS, timeout: 10000 });
       if (response.status !== 200) return null;
 
       const $ = cheerio.load(response.data);
@@ -49,7 +50,7 @@ export class AtCoderService {
 
       // Fetch contest history JSON to get last contest details
       const historyUrl = `${this.BASE_URL}/users/${username}/history/json`;
-      const historyResponse = await axios.get(historyUrl, { headers: this.HEADERS, timeout: 10000 });
+      const historyResponse = await httpGet(historyUrl, { headers: this.HEADERS, timeout: 10000 });
       let lastContestName: string | undefined;
       let lastContestRank: number | undefined;
       let lastContestDelta: number | undefined;
@@ -78,7 +79,7 @@ export class AtCoderService {
 
   public static async fetchUpcomingContests(): Promise<AtCoderContest[]> {
     try {
-      const response = await axios.get(`${this.BASE_URL}/contests/`, { headers: this.HEADERS, timeout: 10000 });
+      const response = await httpGet(`${this.BASE_URL}/contests/`, { headers: this.HEADERS, timeout: 10000 });
       if (response.status !== 200) return [];
 
       const $ = cheerio.load(response.data);

@@ -1,6 +1,6 @@
 declare const chrome: any;
 
-const API_BASE_URL = "https://cp-contest-extension.onrender.com/api";
+const API_BASE_URL = "http://localhost:8000/api";
 
 const isExtension = typeof chrome !== 'undefined' && chrome.storage !== undefined && chrome.storage.local !== undefined;
 
